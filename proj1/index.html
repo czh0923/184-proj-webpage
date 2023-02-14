@@ -1,7 +1,108 @@
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 	<head>
+		<style>
+		body {
+			padding: 100px;
+			width: 1000px;
+			margin: auto;
+			text-align: left;
+			font-weight: 300;
+			font-family: 'Open Sans', sans-serif;
+			color: #121212;
+		}
+		h1, h2, h3, h4 {
+			font-family: 'Source Sans Pro', sans-serif;
+		}
+		</style>
+		<title>CS 184 Rasterizer</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans|Source+Sans+Pro" rel="stylesheet">
 	</head>
-	<body>
-		Project 1 here
+
+
+<body>
+
+	<h1 align="middle">CS 184: Computer Graphics and Imaging, Spring 2018</h1>
+	<h1 align="middle">Project 1: Rasterizer</h1>
+	<h2 align="middle">YOUR NAME, CS184-??</h2>
+
+	<br><br>
+
+	<div>
+
+	<h2 align="middle">Overview</h2>
+	<p>Give a high-level overview of what you implemented in this project. Think about what you've built as a whole. Share your thoughts on what interesting things you've learned from completing the project.</p>
+
+	<h2 align="middle">Section I: Rasterization</h2>
+
+	<h3 align="middle">Part 1: Rasterizing single-color triangles</h3>
+
+	<p>First of all, we determine the bounds for each triangle. Since we can always draw a rectangle around the triangle, 
+	and have all points inside the triangle be in the rectangle, there's no need for us to iterate through the whole image.
+	We only need to iterate through every pixel inside the bounding box.<br>
+	Next, we perform a check for each pixel to see if it's inside the boundary 
+	of the triangle. We did that by looking at if a point was on the "correct" side of an edge of the triangle. If it's on the correct side for all three edges, then the point is in the triangle. A point is considered
+	to be on the correct side if it's on the same side as the third vertex. In this example here, the green point would be on the correct side,
+	because it's in the same half plane as the third vertex, C. To determine which half plane the target point is in, we plugged in the coordinates
+	of the point and the third vertex C into the implicit line equation. If the target point and the third vertex C we used as a check had the same
+	sign, then the target point was on the correct half plane.<br> 
+	Finally, we fill in the color for the pixel if it's in the triangle.<br>
+
+	<img src="images/triangle_ill.jpg" align="middle" width="400px"/><br>
+	Here's the result on test4. Note that there were some aliasing effect on the top of the pink triangle.<br>
+	<img src="images/task1ss.png" align="middle" width="400px"/><br>
+
+	</p>
+
+
+	<h3 align="middle">Part 2: Antialiasing triangles</h3>
+	To remove weird edge effects like the one above, we used supersampling. Supersampling can be approximately thought of as
+	1-pixel box filters. To implement supersampling, for the area of each pixel, we further divide the square into <code>sqrt(sample_rate) * sqrt(sample_rate)</code> of smaller squares (pixels).
+	For each sub pixel, we perform a check to see if it's inside the triangle. If it is, we store this information of this pixel into our <code>sample_buffer</code>. Therefore, the dimension of our sample buffer is <code>sqrt(sample_rate) * image_width</code> by <code>sqrt(sample_rate) * image_height</code>.
+	Then, after we filled in all the sub pixel values, we convert our <code>sample_buffer</code> into <code>framebuffer</code>, which was what's actually displayed on the screen. We did this by dividing the <code>sample_buffer</code> into squares of size <code> sqrt(sample_rate) * sqrt(sample_rate)</code>, then 
+	took the average of the four pixel colors to obtain the final color for the actual pixel which was displayed. 
+	<table style="width:100%">
+	<tr>
+		<td>
+		<img src="images/task1ss.png" align="middle" width="400px"/><br>
+		<figcaption align="middle">sampling rate = 1</figcaption>
+		</td>
+		<td>
+		<img src="images/task2_4.png" align="middle" width="400px"/><br>
+		<figcaption align="middle">sampling rate = 4</figcaption>
+		</td>
+		<td>
+		<img src="images/task2_16.png" align="middle" width="400px"/><br>
+		<figcaption align="middle">sampling rate = 16</figcaption>
+		</td>
+	</tr>
+	</table>
+	As you can see, when sampling rate = 1, there were a gap between two area. However, when we increased the sampling rate, the area gained color, although lighter. This was because 
+	this area was the skinny area of the triangle, and if we only used one point to determine whether the pixel was in the triangle, we could miss. So instead, we now use 4 point/16 points to determine
+	the color of the pixel.
+
+	<h3 align="middle">Part 3: Transforms</h3>
+
+
+
+	<h2 align="middle">Section II: Sampling</h2>
+
+	<h3 align="middle">Part 4: Barycentric coordinates</h3>
+
+
+	<h3 align="middle">Part 5: "Pixel sampling" for texture mapping</h3>
+
+
+	<h3 align="middle">Part 6: "Level sampling" with mipmaps for texture mapping</h3>
+
+
+
+	<h2 align="middle">Section III: Art Competition</h2>
+	<p>If you are not participating in the optional art competition, don't worry about this section!</p>
+
+	<h3 align="middle">Part 7: Draw something interesting!</h3>
+
 	</body>
+
 </html>
