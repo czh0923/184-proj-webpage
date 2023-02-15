@@ -169,6 +169,22 @@
 		In bilinear interpolation, the color of the pixel is determined by blending the colors of the four nearest texels to the pixel. This is achieved through linear interpolation of two upper points, and then two middle points.
 	</p>
 
+	<table>
+		<tr>
+			<td>
+			<img src="images/task5/n.png" width="400px"/><br>
+			<figcaption align="middle">nearest sampling, more color blocks</figcaption>
+			</td>
+			<td>
+			<img src="images/task5/bl.png" width="400px"/><br>
+			<figcaption align="middle">bilinear sampling, smoother transition, looks better</figcaption>
+			</td>
+		</tr>
+	</table>
+
+	<br>
+	<br>
+
 
 	<table>
 		<tr>
@@ -194,6 +210,9 @@
 	</tr>
 	</table>
 
+	<br>
+
+	
 	<p>
 		The main difference between pictures produced by nearest neighbor sampling and bilinear sampling is that nearest neighbor sampling produces a pixelated, sharp image, 
 		while bilinear sampling blurs the image, producing a smoother transition between colors and eliminating jaggies. However, bilinear sampling is also more computation 
