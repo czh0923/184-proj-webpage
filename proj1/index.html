@@ -100,6 +100,27 @@
 	<h2 align="middle">Section II: Sampling</h2>
 
 	<h3 align="middle">Part 4: Barycentric coordinates</h3>
+
+	<p>
+		Barycentric coordinates defines the position of a point with respect to three vertices of the triangle. The basis would be the coordinates of the three vertices, and the 
+        coefficient in front of the vertices, alpha, beta and gamma, specifies the location of the point. By varying the coefficients, we can obtain all the points inside the 
+        triangle. The coordinates of all the points inside the triangle are linear combinations of the coordinates of the three vertices. Here is an example. We defined the colors of the 
+        vertices, and found all possible combinations of alpha, beta and gamma, such that $$\alpha + \beta + \gamma = 1$$ which means that the point is in the triangle.
+        Then we use the coefficients to linearly interpolate the color of the vertices to obtain the corresponding color of the point. The result is very smooth. 
+	</p>
+
+	<table style="width:100%">
+		<tr>
+			<td>
+			<img src="images/task4/triangle.png" align="middle" width="400px"/><br>
+			<figcaption align="middle">Triangle</figcaption>
+			</td>
+			<td>
+			<img src="images/task4/circle.png" align="middle" width="400px"/><br>
+			<figcaption align="middle">Circle</figcaption>
+			</td>
+		</tr>
+	</table>
 	
 
 
@@ -125,23 +146,23 @@
 	<table>
 		<tr>
 			<td>
-			<img src="images/task1ss.png" width="400px"/><br>
-			<figcaption align="middle">sampling rate = 1</figcaption>
+			<img src="images/task5/n1.png" width="400px"/><br>
+			<figcaption align="middle">nearest sampling, sampling rate = 1</figcaption>
 			</td>
 			<td>
-			<img src="images/task2_4.png" width="400px"/><br>
-			<figcaption align="middle">sampling rate = 4</figcaption>
+			<img src="images/task5/n16.png" width="400px"/><br>
+			<figcaption align="middle">nearest sampling, sampling rate = 16</figcaption>
 			</td>
 		</tr>
 
 	<tr>
 		<td>
-		<img src="images/task2_16.png" width="400px"/><br>
-		<figcaption align="middle">sampling rate = 16</figcaption>
+		<img src="images/task5/b1.png" width="400px"/><br>
+		<figcaption align="middle">bilinear sampling, sampling rate = 1</figcaption>
 		</td>
 		<td>
-		<img src="images/task2_16.png" width="400px"/><br>
-		<figcaption align="middle">sampling rate = 16</figcaption>
+		<img src="images/task5/b16.png" width="400px"/><br>
+		<figcaption align="middle">bilinear sampling, sampling rate = 16</figcaption>
 		</td>
 	</tr>
 	</table>
@@ -189,11 +210,11 @@
 	<table>
 		<tr>
 			<td>
-			<img src="images/task1ss.png" width="400px"/><br>
+			<img src="images/task6/0n.png" width="400px"/><br>
 			<figcaption align="middle">L_ZERO and P_NEAREST</figcaption>
 			</td>
 			<td>
-			<img src="images/task2_4.png" width="400px"/><br>
+			<img src="images/task6/0l.png" width="400px"/><br>
 			<figcaption align="middle">L_ZERO and P_LINEAR</figcaption>
 			</td>
 		</tr>
@@ -201,11 +222,11 @@
 
 		<tr>
 			<td>
-			<img src="images/task2_16.png" width="400px"/><br>
-			<figcaption align="middle">_NEAREST and P_NEAREST</figcaption>
+			<img src="images/task6/nn.png" width="400px"/><br>
+			<figcaption align="middle">L_NEAREST and P_NEAREST</figcaption>
 			</td>
 			<td>
-			<img src="images/task2_16.png" width="400px"/><br>
+			<img src="images/task6/nl.png" width="400px"/><br>
 			<figcaption align="middle">L_NEAREST and P_LINEAR</figcaption>
 			</td>
 		</tr>
@@ -222,7 +243,10 @@
 		Pixel sampling requires only negligible additional memory, and only requires a little more calculation to average the color of the four points. Still, it has greate antialiasing power. 
 	</p>
 
-	<p>Website Link: https://czh0923.github.io/184-proj-webpage/proj1/index.html</p>
+	<br>
+	<br>
+
+	<p>Website Link: <a href="https://czh0923.github.io/184-proj-webpage/proj1/index.html">https://czh0923.github.io/184-proj-webpage/proj1/index.html</a></p>
 
 	</body>
 
