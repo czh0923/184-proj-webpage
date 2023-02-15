@@ -100,6 +100,7 @@
 	<h2 align="middle">Section II: Sampling</h2>
 
 	<h3 align="middle">Part 4: Barycentric coordinates</h3>
+	
 
 
 	<h3 align="middle">Part 5: "Pixel sampling" for texture mapping</h3>
@@ -108,7 +109,7 @@
 		Pixel sampling is the process of determining the color of a pixel by sampling the corresponding point on the texture. 
 		Texture sampling is an example of this process. We determine the mapping from (x, y) in screen space to (u,v) in texture space with the help of Barcentric coordinates. 
 		For a point in a triangle, we first calculate the barycentric coodinate of this point: 
-		$$ {(x, y) = \alpha (x_0, y_0) + \beta (x_1, y_1) + \gamma (x_2, y_2)} $$ 
+		$$ (\alpha, \beta, \gamma) \text{, where&nbsp;&nbsp;&nbsp;}  {(x, y) = \alpha (x_0, y_0) + \beta (x_1, y_1) + \gamma (x_2, y_2)} $$ 
 		Then, we use barycentric coordinate to get this point's correspoding point in the texture space:
 		$$ {(u, v) = \alpha (u_0, v_0)+ \beta (u_1, v_1) + \gamma (u_2, v_2)} $$ 
 
@@ -155,6 +156,8 @@
 		helps smoothing out colors. 
 	</p>
 
+	<br>
+
 
 	<h3 align="middle">Part 6: "Level sampling" with mipmaps for texture mapping</h3>
 
@@ -171,15 +174,55 @@
 		If the object is very small on the screen or very far away, a lower-resolution mipmap is used. 
 		If the object is large on the screen or very close, a higher-resolution mipmap is used.
 
+		We calculate the level using the formula: 
+		$$ L = max(\sqrt{(\frac{du}{dx})^2 + (\frac{dv}{dx})^2}, \sqrt{(\frac{du}{dy})^2 + (\frac{dv}{dy})^2}) $$ 
+		$$ D = \log_{2}L $$
 
+		where D is the level as a float. Then, we choose our desired level:
+		$$ level = \begin{cases} 0&\text{zero level}  \\ \text{rounded(D)}&\text{nearest level} \\\text{floor(D) and ceil(D)}&\text{linear level} \end{cases} $$
+
+		Note that for linear level sampling, we sample at both level floor(D) and ceil(D), and then we perform linear interpolation using the two colors we got.
 	</p>
 
+	<br>
+	
+	<table>
+		<tr>
+			<td>
+			<img src="images/task1ss.png" width="400px"/><br>
+			<figcaption align="middle">L_ZERO and P_NEAREST</figcaption>
+			</td>
+			<td>
+			<img src="images/task2_4.png" width="400px"/><br>
+			<figcaption align="middle">L_ZERO and P_LINEAR</figcaption>
+			</td>
+		</tr>
 
 
-	<h2 align="middle">Section III: Art Competition</h2>
-	<p>If you are not participating in the optional art competition, don't worry about this section!</p>
+		<tr>
+			<td>
+			<img src="images/task2_16.png" width="400px"/><br>
+			<figcaption align="middle">_NEAREST and P_NEAREST</figcaption>
+			</td>
+			<td>
+			<img src="images/task2_16.png" width="400px"/><br>
+			<figcaption align="middle">L_NEAREST and P_LINEAR</figcaption>
+			</td>
+		</tr>
+	</table>
 
-	<h3 align="middle">Part 7: Draw something interesting!</h3>
+	<br>
+
+	<p>
+		Supersampling has the strongest antialiasing power among the three, but it is also memory expansive and slow, since it requires large sample buffer and large amount of sample points. 
+		<br>
+		Level sampling also has strong antialiasing power. It requires a third more of the original memory size, which is not that much larger. 
+		It is also a bit slower, since we need to calculate the correct level that we need to sample texture from.
+		<br>
+		Pixel sampling requires only negligible additional memory, and only requires a little more calculation to average the color of the four points. Still, it has greate antialiasing power. 
+	</p>
+
+	<p>Website Link: https://czh0923.github.io/184-proj-webpage/proj1/index.html</p>
 
 	</body>
 
